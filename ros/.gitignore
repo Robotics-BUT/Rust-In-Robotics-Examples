@@ -1,0 +1,6 @@
+**/build/
+**/devel/
+**/.idea/
+**/cmake*/
+**/__pycache__/
+**/.catkin_workspace

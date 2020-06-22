@@ -1,0 +1,16 @@
+#! /usr/bin/env python3
+
+import python_node.Controller as cnt
+import rospy
+from std_msgs.msg import Header
+
+if __name__ == '__main__':
+
+    a = Header
+    rospy.init_node('python_node', anonymous=True)
+
+    controller = cnt.Controller()
+
+    rospy.spin()
+
+
