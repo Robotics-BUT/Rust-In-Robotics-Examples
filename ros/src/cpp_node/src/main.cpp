@@ -17,7 +17,9 @@ public:
 private:
 
     void subscriber_callback (const std_msgs::Header& msg) const {
-        std::cout << "Received msg with seq: " << msg.seq << std::endl;
+
+        auto delay = ros::Time::now() - msg.stamp;
+        std::cout << "Message delay: " << delay << " sec" << std::endl;
     }
 
     void timer_callback (const ros::TimerEvent& event) const {
