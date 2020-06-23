@@ -1,4 +1,5 @@
 use rosrust;
+extern crate rust_node;
 
 fn main() {
 
@@ -10,6 +11,10 @@ fn main() {
         publisher.send(v).unwrap();
     })
         .unwrap();
+
+    let controller = rust_node::Controller::new();
+
+    let a = publisher;
 
     rosrust::spin();
 }
