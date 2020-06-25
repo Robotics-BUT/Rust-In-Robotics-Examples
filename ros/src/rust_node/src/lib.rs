@@ -1,25 +1,22 @@
 use rosrust;
-use rosrust::Message;
+use std::sync::Arc;
 
-pub struct Controller<T>{
-    subscriber: subscriber<T>,
-    publisher: publisher<T>,
+pub struct Controller{
+    subscriber: Arc<rosrust::Subscriber>,
 }
 
 
-impl<T> Controller<T> where T: Message {
+impl Controller  {
 
-    pub fn new() -> Controller<T> {
+    pub fn new() -> Controller {
 
-        let publisher = rosrust::publish("rust_to_cpp", 0).unwrap();
-        let subscriber = rosrust::subscribe("python_to_rust", 1, move |v: rosrust_msg::std_msgs::Header| {
-            rosrust::ros_info!("Received: {}", v.seq);
+        let publisher = Arc::new(rosrust::publish("rust_to_cpp", 0).unwrap());
+        let subscriber = Arc::new(rosrust::subscribe("python_to_rust", 1, move |v: rosrust_msg::std_msgs::Header| {
             publisher.send(v).unwrap();
-        });
+        }).unwrap());
 
         Controller {
             subscriber,
-            publisher
         }
     }
 }
